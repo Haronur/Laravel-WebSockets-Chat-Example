@@ -60,3 +60,31 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Laravel WebSockets Installation & Configuration 01
+#### Installation
+
+- Laravel WebSockets can be installed via composer:
+
+`composer require beyondcode/laravel-websockets`
+
+- The package will automatically register a service provider.
+
+- This package comes with a migration to store statistic information while running your WebSocket server. You can publish the migration file using:
+
+`php artisan vendor:publish --provider="BeyondCode\LaravelWebSockets\WebSocketsServiceProvider" --tag="migrations"`
+
+- Run the migrations with:
+
+`php artisan migrate`
+
+- Next, you need to publish the WebSocket configuration file:
+
+`php artisan vendor:publish --provider="BeyondCode\LaravelWebSockets\WebSocketsServiceProvider" --tag="config"`
+
+- This is the default content of the config file that will be published as config/websockets.php:
+
+### Pusher Replacement
+- To make use of the Laravel WebSockets package in combination with Pusher, you first need to install the official Pusher PHP SDK.
+
+`composer require pusher/pusher-php-server "~3.0"`
