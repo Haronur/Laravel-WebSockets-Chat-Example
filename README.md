@@ -88,3 +88,104 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 - To make use of the Laravel WebSockets package in combination with Pusher, you first need to install the official Pusher PHP SDK.
 
 `composer require pusher/pusher-php-server "~3.0"`
+
+## Laravel WebSockets Installation & Configuration 02
+#### Configuration
+
+- setup `.env` file in your root directory 
+
+- Database
+```
+PUSHER_APP_ID=anyId
+PUSHER_APP_KEY=anyKey
+PUSHER_APP_SECRET=anySecret
+PUSHER_APP_CLUSTER=mt1
+```
+- Hit this URL below on Browser :
+
+`http://127.0.0.1:8000/laravel-websockets`
+
+- Next, you should make sure to use Pusher as your broadcasting driver. This can be achieved by setting the BROADCAST_DRIVER environment variable in your `.env` file:
+
+- Database
+```
+BROADCAST_DRIVER=pusher
+```
+### Pusher Configuration
+- To do this, you should add the host and port configuration key to your `config/broadcasting.php` and add it to the pusher section. The default port of the Laravel WebSocket server is `6001`.
+```
+        'pusher' => [
+            'driver' => 'pusher',
+            'key' => env('PUSHER_APP_KEY'),
+            'secret' => env('PUSHER_APP_SECRET'),
+            'app_id' => env('PUSHER_APP_ID'),
+            'options' => [
+                'cluster' => env('PUSHER_APP_CLUSTER'),
+                'useTLS' => true,
+                'encrypted' => true,
+                'host' => '127.0.0.1',
+                'port' => 6001,
+                'scheme' => 'http'
+            ],
+        ],
+
+```
+
+### Configuring WebSocket Apps
+- You may add additional apps in your `config/websockets.php` file.
+
+```
+    'apps' => [
+        [
+            'id' => env('PUSHER_APP_ID'),
+            'name' => env('APP_NAME'),
+            'key' => env('PUSHER_APP_KEY'),
+            'secret' => env('PUSHER_APP_SECRET'),
+            'path' => env('PUSHER_APP_PATH'),
+            'capacity' => null,
+            'enable_client_messages' => false,
+            'enable_statistics' => true,
+        ],
+    ],
+```
+- Once installed, you can start it with one simple command: `php artisan websockets:serve`
+
+- Hit this URL below on Browser : `http://127.0.0.1:8000/laravel-websockets`
+
+###  JavaScript & CSS Scaffolding
+
+```
+composer require laravel/ui
+
+// Generate basic scaffolding...
+php artisan ui bootstrap
+php artisan ui vue
+php artisan ui react
+
+// Generate login / registration scaffolding...
+php artisan ui bootstrap --auth
+php artisan ui vue --auth
+php artisan ui react --auth
+```
+### Install laravel-echo pusher 
+`npm install --save-dev laravel-echo pusher-js`
+
+`php artisan make:event WebsocketDemoEvent`
+
+
+###  JavaScript & CSS Scaffolding
+
+```
+composer require laravel/ui
+
+// Generate basic scaffolding...
+php artisan ui bootstrap
+php artisan ui vue
+php artisan ui react
+
+// Generate login / registration scaffolding...
+php artisan ui bootstrap --auth
+php artisan ui vue --auth
+php artisan ui react --auth
+```
+### Follow This Instruction Below Link: https://www.youtube.com/watch?v=H_4UubWE9NQ&ab_channel=QiroLab
